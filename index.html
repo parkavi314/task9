@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpendSmart</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="js/app.js"></script>
+</head>
+<body>
+    <header class="page-header">
+        <div>
+            <p class="eyebrow">YOUR MONEY, MADE CLEAR</p>
+            <h1>SpendSmart</h1>
+            <p>Track your expenses and take control of your money.</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="dashboard" aria-label="Monthly summary">
+            <article class="summary-card">
+                <p>Spent this month</p>
+                <h2 id="totalSpent">₹0.00</h2>
+            </article>
+            <article class="summary-card">
+                <p>Expenses this month</p>
+                <h2 id="expenseCount">0</h2>
+            </article>
+            <article class="summary-card">
+                <p>Remaining budget</p>
+                <h2 id="remainingBudget">₹0.00</h2>
+            </article>
+        </section>
+
+        <p id="budgetWarning" class="warning" role="status" hidden></p>
+
+        <section class="budget-panel">
+            <div>
+                <h2>Monthly budget</h2>
+                <p>Set the limit you want to stay within.</p>
+            </div>
+            <form id="budgetForm" class="budget-form">
+                <label for="budget">Budget (₹)</label>
+                <input id="budget" type="number" min="0" step="0.01" required>
+                <button type="submit">Save budget</button>
+            </form>
+        </section>
+
+        <section class="main-grid">
+            <section class="panel">
+                <h2>Add an expense</h2>
+                <form id="expenseForm">
+                    <label for="name">Expense name</label>
+                    <input id="name" name="name" type="text" maxlength="80" required placeholder="e.g. Lunch">
+
+                    <label for="amount">Amount (₹)</label>
+                    <input id="amount" name="amount" type="number" min="0.01" step="0.01" required placeholder="e.g. 250">
+
+                    <label for="category">Category</label>
+                    <select id="category" name="category" required>
+                        <option value="">Choose a category</option>
+                        <option>Food</option>
+                        <option>Travel</option>
+                        <option>Shopping</option>
+                        <option>Other</option>
+                    </select>
+
+                    <label for="date">Date</label>
+                    <input id="date" name="date" type="date" required>
+
+                    <button type="submit">+ Add expense</button>
+                </form>
+                <p id="formMessage" class="message" role="status"></p>
+            </section>
+
+            <section class="panel transactions-panel">
+                <div class="section-heading">
+                    <div>
+                        <h2>Transactions</h2>
+                        <p id="transactionCount">0 transactions</p>
+                    </div>
+                    <button id="clearButton" class="button-danger" type="button">Clear all</button>
+                </div>
+
+                <div class="filters">
+                    <label class="filter-field" for="search">Search name
+                        <input id="search" type="search" placeholder="Search expenses...">
+                    </label>
+                    <label class="filter-field" for="categoryFilter">Category
+                        <select id="categoryFilter">
+                            <option value="All">All categories</option>
+                            <option>Food</option>
+                            <option>Travel</option>
+                            <option>Shopping</option>
+                            <option>Other</option>
+                        </select>
+                    </label>
+                    <label class="filter-field" for="sortDate">Sort by date
+                        <select id="sortDate">
+                            <option value="newest">Newest first</option>
+                            <option value="oldest">Oldest first</option>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Amount</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expenseList"></tbody>
+                    </table>
+                    <p id="emptyMessage" class="empty-message">No expenses yet. Add your first one!</p>
+                </div>
+
+                <div class="file-actions">
+                    <button id="exportButton" type="button" class="button-secondary">Export JSON</button>
+                    <label class="import-label" for="importFile">Import JSON</label>
+                    <input id="importFile" type="file" accept=".json,application/json" hidden>
+                </div>
+                <p id="fileMessage" class="message" role="status"></p>
+            </section>
+        </section>
+
+        <footer>
+            <p>SpendSmart · Simple spending, smarter choices.</p>
+        </footer>
+    </main>
+</body>
+</html>
